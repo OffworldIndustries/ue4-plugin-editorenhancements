@@ -12,7 +12,7 @@ bool FOWIReferenceRule::IsViolated(const FString& AssetPath, const TArray<FName>
 			&& AssetPath.StartsWith(MayNotReferenceFolder.Path) == false
 			&& IsException(Reference) == false)
 		{
-			ValidationError = AssetPath + " references " + MayNotReferenceFolder.Path;
+			ValidationError = AssetPath + " references " + Reference.ToString() + " in invalid folder " + MayNotReferenceFolder.Path;
 			return true;
 		}
 	}
@@ -149,7 +149,7 @@ bool UOWIReferenceRulesHandler::IsBlackListed(const FString& AssetPath, const TA
 			if (Reference.ToString().StartsWith(BlackListItem.Path)
 				&& AssetPath.StartsWith(BlackListItem.Path) == false)
 			{
-				ValidationError = AssetPath + " references " + Reference.ToString();
+				ValidationError = AssetPath + " references " + Reference.ToString() + " in invalid folder " + BlackListItem.Path;
 				return true;
 			}
 		}
