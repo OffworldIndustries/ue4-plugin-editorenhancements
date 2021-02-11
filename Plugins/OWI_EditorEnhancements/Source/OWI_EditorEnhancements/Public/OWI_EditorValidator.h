@@ -10,6 +10,10 @@ UCLASS()
 class OWI_EDITORENHANCEMENTS_API UOWIEditorValidator final : public UEditorValidatorBase
 {
 	GENERATED_BODY()
+
+public:
+
+	virtual bool IsEnabled() const override;
 	
 protected:
 	

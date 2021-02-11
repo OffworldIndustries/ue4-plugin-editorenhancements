@@ -69,8 +69,8 @@ class OWI_EDITORENHANCEMENTS_API UOWITextureFactory final : public UTextureFacto
 	GENERATED_BODY()
 	
 public:
-	
-	UOWITextureFactory(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+	explicit UOWITextureFactory(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	//~ Begin UFactory Interface
 	virtual UObject* FactoryCreateBinary( UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, const TCHAR* Type, const uint8*& Buffer, const uint8* BufferEnd, FFeedbackContext* Warn ) override;
@@ -84,7 +84,7 @@ private:
 	
 };
 
-class OWI_EDITORENHANCEMENTS_API SOWITextureImportSettingsDialog : public SCompoundWidget
+class OWI_EDITORENHANCEMENTS_API SOWITextureImportSettingsDialog final : public SCompoundWidget
 {
 	
 public:
@@ -138,13 +138,13 @@ private:
 	// The currently selected ImageImportSetting
 	FOWITextureImportSettings* CurrentImageImportSettings = nullptr;
 	
-	void HandleImageImportSettingSelectionChanged (TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo);
+	void HandleImageImportSettingSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType);
 
-	void HandleCompressionSettingSelectionChanged (TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo) const;
+	void HandleCompressionSettingSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const;
 
-	void HandleMipGenSettingsSelectionChanged (TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo) const;
+	void HandleMipGenSettingsSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const;
 
-	void HandleLODGroupSettingsSelectionChanged (TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo) const;
+	void HandleLODGroupSettingsSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const;
 
 	TArray<TSharedPtr<FString>> GetEnumNames(const TCHAR* Name) const;
 

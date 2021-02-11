@@ -233,7 +233,7 @@ bool SOWITextureImportSettingsDialog::UseSameSettingsForAll() const
     return bUseSameSettingsForAll;
 }
 
-void SOWITextureImportSettingsDialog::HandleImageImportSettingSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo)
+void SOWITextureImportSettingsDialog::HandleImageImportSettingSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType)
 {
     if (NewSelection != nullptr)
     {
@@ -244,7 +244,7 @@ void SOWITextureImportSettingsDialog::HandleImageImportSettingSelectionChanged(T
     }
 }
 
-void SOWITextureImportSettingsDialog::HandleCompressionSettingSelectionChanged(const TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo) const
+void SOWITextureImportSettingsDialog::HandleCompressionSettingSelectionChanged(const TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const
 {
     if (NewSelection != nullptr)
     {
@@ -252,7 +252,7 @@ void SOWITextureImportSettingsDialog::HandleCompressionSettingSelectionChanged(c
     }
 }
 
-void SOWITextureImportSettingsDialog::HandleMipGenSettingsSelectionChanged(const TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo) const
+void SOWITextureImportSettingsDialog::HandleMipGenSettingsSelectionChanged(const TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const
 {
     if (NewSelection != nullptr)
     {
@@ -260,7 +260,7 @@ void SOWITextureImportSettingsDialog::HandleMipGenSettingsSelectionChanged(const
     }
 }
 
-void SOWITextureImportSettingsDialog::HandleLODGroupSettingsSelectionChanged(const TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo) const
+void SOWITextureImportSettingsDialog::HandleLODGroupSettingsSelectionChanged(const TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const
 {
     if (NewSelection != nullptr)
     {

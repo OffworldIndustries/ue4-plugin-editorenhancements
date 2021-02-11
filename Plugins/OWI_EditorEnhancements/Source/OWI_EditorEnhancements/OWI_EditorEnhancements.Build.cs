@@ -9,14 +9,14 @@ public class OWI_EditorEnhancements : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		
 		PublicDependencyModuleNames.AddRange(
-			new string[]
+			new []
 			{
 				"Core"
 			}
 		);
 		
 		PrivateDependencyModuleNames.AddRange(
-			new string[]
+			new []
 			{
 				"CoreUObject",
 				"Engine",
