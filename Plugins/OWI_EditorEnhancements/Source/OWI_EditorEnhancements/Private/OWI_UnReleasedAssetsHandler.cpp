@@ -1,15 +1,15 @@
 // Copyright Offworld Industries
 
 #include "OWI_UnReleasedAssetsHandler.h"
-#include "ConfigCacheIni.h"
+#include "Misc/ConfigCacheIni.h"
 #include "ContentBrowserModule.h"
-#include "FileHelper.h"
+#include "Misc/FileHelper.h"
 #include "OWI_ReferenceRulesHandler.h"
 #include "Editor/ContentBrowser/Private/ContentBrowserUtils.h"
 #include "Engine/EngineTypes.h"
 #include "Settings/ProjectPackagingSettings.h"
 #include "EditorAssetLibrary.h"
-#include "TokenizedMessage.h"
+#include "Logging/TokenizedMessage.h"
 
 DEFINE_LOG_CATEGORY(LogUnReleasedAssetHandler);
 

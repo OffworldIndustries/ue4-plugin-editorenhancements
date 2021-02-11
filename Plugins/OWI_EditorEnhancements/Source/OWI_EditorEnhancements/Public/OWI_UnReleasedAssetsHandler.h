@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Paths.h"
+#include "Misc/Paths.h"
 #include "Engine/DeveloperSettings.h"
 #include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"

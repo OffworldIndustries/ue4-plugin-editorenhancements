@@ -4,6 +4,11 @@
 #include "OWI_ReferenceRulesHandler.h"
 #include "OWI_NamingConventionHandler.h"
 
+bool UOWIEditorValidator::IsEnabled() const
+{
+	return GetDefault<UOWINamingConventionHandlerSettings>()->bEnabled || GetDefault<UOWIReferenceRulesHandlerSettings>()->bEnabled;
+}
+
 bool UOWIEditorValidator::CanValidateAsset_Implementation(UObject* InAsset) const
 {	
 	if (nullptr == InAsset)

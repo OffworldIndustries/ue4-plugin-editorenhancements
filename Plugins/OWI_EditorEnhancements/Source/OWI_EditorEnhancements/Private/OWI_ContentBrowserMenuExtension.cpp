@@ -60,7 +60,7 @@ void FOWIContentBrowserMenuExtension::AddMenuEntry(FMenuBuilder& MenuBuilder, co
 	MenuBuilder.EndSection();
 }
 
-void FOWIContentBrowserMenuExtension::FillSubmenu(FMenuBuilder& MenuBuilder, TArray<FString> SelectedPaths)
+void FOWIContentBrowserMenuExtension::FillSubmenu(FMenuBuilder& MenuBuilder, const TArray<FString> SelectedPaths)
 {
 	MenuBuilder.AddMenuEntry(
         FText::FromString("Release Folders"),
