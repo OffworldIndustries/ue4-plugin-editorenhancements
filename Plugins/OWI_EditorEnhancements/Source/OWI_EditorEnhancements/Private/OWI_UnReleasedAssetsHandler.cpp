@@ -254,7 +254,7 @@ void UOWIUnReleasedAssetsHandler::UpdateColor(const FString FolderPath, const EP
 	// If you really need this add CONTENTBROWSER_API in front of the function in the header file
 	// This will make it so the Color is immediately updated without having to restart the Editor
 	// You may then remove the lines below it as ContentBrowserUtils does basically the same thing
-	TSharedPtr<FLinearColor> Color;
+	/*TSharedPtr<FLinearColor> Color;
 	switch (PathState)
 	{
 		case Unreleased:
@@ -276,8 +276,8 @@ void UOWIUnReleasedAssetsHandler::UpdateColor(const FString FolderPath, const EP
 			}
 	}
 	ContentBrowserUtils::SaveColor(FolderPath, Color, true);
+	*/
 	
-	/*
 	if(FPaths::FileExists(GEditorPerProjectIni))
 	{
 		switch (PathState)
@@ -294,7 +294,7 @@ void UOWIUnReleasedAssetsHandler::UpdateColor(const FString FolderPath, const EP
 			GConfig->SetString(TEXT("PathColor"), *FolderPath, *Settings->MixedFolderColor.ToString(), GEditorPerProjectIni);
 			break;
 		}
-	}*/
+	}
 }
 
 void UOWIUnReleasedAssetsHandler::HandleSubfolderRelease(const FString CurrentFolderPath, const FString ReleaseFolderPath)
