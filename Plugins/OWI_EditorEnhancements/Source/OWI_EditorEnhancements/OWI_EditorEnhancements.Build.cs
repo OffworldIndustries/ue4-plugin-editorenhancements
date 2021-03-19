@@ -26,7 +26,8 @@ public class OWI_EditorEnhancements : ModuleRules
 				"UnrealEd",
 				"InputCore",
 				"ContentBrowser",
-				"EditorScriptingUtilities"
+				"EditorScriptingUtilities",
+				"RenderCore"
 			}
 		);
 	}
