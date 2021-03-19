@@ -16,12 +16,19 @@ void FOWIEditorEnhancementsModule::StartupModule()
 	// Unfortunately the ColorPath changes can't be synchronised so make sure we mark all folder accordingly
 	UOWIUnReleasedAssetsHandler* UnReleasedAssetsHandler = NewObject<UOWIUnReleasedAssetsHandler>();
 	UnReleasedAssetsHandler->UpdateFolderColorsOnStart();
+
+	// Custom Shaders folder for USH/USF shaders
+	FString ShaderDirectory = FPaths::Combine(FPaths::ProjectDir(), TEXT("Shaders"));
+	if (FPaths::DirectoryExists(ShaderDirectory) && FPaths::ValidatePath(ShaderDirectory))
+	{
+		AddShaderSourceDirectoryMapping("/Shaders", ShaderDirectory);
+	}
 }
 
 void FOWIEditorEnhancementsModule::ShutdownModule()
 {
+	ResetAllShaderSourceDirectoryMappings();
 }
-
 TSharedRef<FExtender> FOWIEditorEnhancementsModule::ContentBrowserExtender(const TArray<FString>& Path)
 {
 	Extension = MakeShareable(new FOWIContentBrowserMenuExtension());
