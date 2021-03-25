@@ -2,7 +2,7 @@
 > Enhancements for UE4 to help enforce good working practices. 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/offworldindustries/ue4-plugin-editorenhancements)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/OffworldIndustries/ue4-plugin-editorenhancements)
 ![GitHub contributors](https://img.shields.io/github/contributors/offworldindustries/ue4-plugin-editorenhancements)
 ![Discord](https://img.shields.io/discord/101469020510773248)
 
