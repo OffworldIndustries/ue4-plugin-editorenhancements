@@ -2,8 +2,8 @@
 > Enhancements for UE4 to help enforce good working practices. 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/offworldindustries/plugin-editorenhancements)
-![GitHub contributors](https://img.shields.io/github/contributors/offworldindustries/plugin-editorenhancements)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/offworldindustries/ue4-plugin-editorenhancements)
+![GitHub contributors](https://img.shields.io/github/contributors/offworldindustries/ue4-plugin-editorenhancements)
 ![Discord](https://img.shields.io/discord/101469020510773248)
 
 This is an internal tool used at [Offworld Industries](https://www.offworldindustries.com/) we have decided to open source this project as it might be useful. This repository is a group of Unreal Engine 4 tools to help enforce and maintain good working practices. 
@@ -27,7 +27,7 @@ Also when importing a Texture (and at least 1 Preset exists) a dialog will appea
 
 ## Contributing
 
-1. Fork it (<https://github.com/offworldindustries/plugin-editorenhancements/fork>)
+1. Fork it (<https://github.com/offworldindustries/ue4-plugin-editorenhancements/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
