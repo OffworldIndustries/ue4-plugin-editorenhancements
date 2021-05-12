@@ -1,10 +1,9 @@
-// Copyright Offworld Industries
+// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Framework/MultiBox/MultiBoxExtender.h"
-#include "Modules/ModuleManager.h"
 
 class FOWIContentBrowserMenuExtension;
 

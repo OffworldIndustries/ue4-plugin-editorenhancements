@@ -1,4 +1,4 @@
-// Copyright Offworld Industries
+// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_ContentBrowserMenuExtension.h"
 #include "OWI_UnReleasedAssetsHandler.h"
@@ -60,7 +60,7 @@ void FOWIContentBrowserMenuExtension::AddMenuEntry(FMenuBuilder& MenuBuilder, co
 	MenuBuilder.EndSection();
 }
 
-void FOWIContentBrowserMenuExtension::FillSubmenu(FMenuBuilder& MenuBuilder, const TArray<FString> SelectedPaths)
+void FOWIContentBrowserMenuExtension::FillSubmenu(FMenuBuilder& MenuBuilder, const TArray<FString> SelectedPaths) const
 {
 	MenuBuilder.AddMenuEntry(
         FText::FromString("Release Folders"),

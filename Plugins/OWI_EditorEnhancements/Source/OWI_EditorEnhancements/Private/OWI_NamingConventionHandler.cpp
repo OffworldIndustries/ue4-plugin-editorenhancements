@@ -1,4 +1,4 @@
-﻿// Copyright Offworld Industries
+﻿// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_NamingConventionHandler.h"
 #include "Engine/Blueprint.h"
