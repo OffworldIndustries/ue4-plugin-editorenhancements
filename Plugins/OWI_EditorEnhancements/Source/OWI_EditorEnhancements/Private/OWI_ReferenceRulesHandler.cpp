@@ -19,14 +19,14 @@ bool FOWIReferenceRule::IsViolated(const FString& AssetPath, const TArray<FName>
 		if (Reference.ToString().StartsWith(MayNotReferenceFolder.Path)
 			&& AssetPath.StartsWith(MayNotReferenceFolder.Path) == false)
 		{
-			ValidationError = AssetPath + " references " + Reference.ToString() + " in folder " + MayNotReferenceFolder.Path;
+			ValidationError = FString::Printf(TEXT("%s references %s in folder %s."), *AssetPath, *Reference.ToString(), *MayNotReferenceFolder.Path);
 			return true;
 		}
 
 		const FString MayNotReferenceFilePath = ConvertFilePath(MayNotReferenceFile);
 		if (Reference.ToString().Equals(MayNotReferenceFilePath))
 		{
-			ValidationError = AssetPath + " references " + Reference.ToString();
+			ValidationError = FString::Printf(TEXT("%s references %s."), *AssetPath, *Reference.ToString());
 			return true;
 		}
 	}
@@ -40,7 +40,7 @@ bool FOWIReferenceRule::CanBeApplied(const FString& AssetPath) const
 	return AssetPath.StartsWith(AssetFolder.Path) || AssetPath.Equals(AssetFilePath);
 }
 
-FString FOWIReferenceRule::ConvertFilePath(const FFilePath FilePath)
+FString FOWIReferenceRule::ConvertFilePath(const FFilePath& FilePath)
 {
 	FString OutString = FilePath.FilePath;
 	if (FPaths::IsRelative(FilePath.FilePath))
@@ -184,7 +184,7 @@ bool UOWIReferenceRulesHandler::IsBlackListed(const FString& AssetPath, const TA
 			if (Reference.ToString().StartsWith(BlackListItem.Path)
 				&& AssetPath.StartsWith(BlackListItem.Path) == false)
 			{
-				ValidationError = AssetPath + " references " + Reference.ToString() + " in folder " + BlackListItem.Path;
+				ValidationError = FString::Printf(TEXT("%s references %s in folder %s."), *AssetPath, *Reference.ToString(), *BlackListItem.Path);
 				return true;
 			}
 		}
@@ -195,7 +195,7 @@ bool UOWIReferenceRulesHandler::IsBlackListed(const FString& AssetPath, const TA
 			if (Reference.ToString().Equals(BlackListItemPath)
 				&& AssetPath.Equals(BlackListItemPath) == false)
 			{
-				ValidationError = AssetPath + " references " + Reference.ToString();
+				ValidationError = FString::Printf(TEXT("%s references %s."), *AssetPath, *Reference.ToString());
 				return true;
 			}
 		}
@@ -218,7 +218,7 @@ bool UOWIReferenceRulesHandler::HasCircularDependency(const FString& AssetPath, 
 
 		if (Reference.ToString().StartsWith(AssetPath))
 		{
-			ValidationError = AssetPath + " has circular dependency.";
+			ValidationError = FString::Printf(TEXT("%s has circular dependency."), *AssetPath);
 			return true;
 		}
 

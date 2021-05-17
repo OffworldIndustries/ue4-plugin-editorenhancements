@@ -57,7 +57,7 @@ public:
 	* \param FilePath The FilePath to convert
 	* \return The String with absolute /Game/ path and w/out extension
 	*/
-	static FString ConvertFilePath(const FFilePath FilePath);
+	static FString ConvertFilePath(const FFilePath& FilePath);
 	
 private:
 
