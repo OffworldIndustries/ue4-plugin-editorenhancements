@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 using UnrealBuildTool;
-using System.Collections.Generic;
 
 public class OWI_PluginBaseTarget : TargetRules
 {
@@ -9,6 +8,6 @@ public class OWI_PluginBaseTarget : TargetRules
 	{
 		Type = TargetType.Game;
 
-		ExtraModuleNames.AddRange( new string[] { "OWI_PluginBase" } );
+		ExtraModuleNames.AddRange( new[] { "OWI_PluginBase" } );
 	}
 }

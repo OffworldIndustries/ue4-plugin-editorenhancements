@@ -1,13 +1,10 @@
-// Copyright Offworld Industries
+// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_TextureFactory.h"
 
 #include "AssetImportTask.h"
 #include "AssetToolsModule.h"
-#include "Editor.h"
 #include "Dialogs/CustomDialog.h"
-#include "Modules/ModuleManager.h"
-#include "Engine/Texture2D.h"
 #include "Widgets/Images/SImage.h"
 #include "Widgets/Input/STextComboBox.h"
 #include "Widgets/Input/SSpinBox.h"
@@ -233,7 +230,7 @@ bool SOWITextureImportSettingsDialog::UseSameSettingsForAll() const
     return bUseSameSettingsForAll;
 }
 
-void SOWITextureImportSettingsDialog::HandleImageImportSettingSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType)
+void SOWITextureImportSettingsDialog::HandleImageImportSettingSelectionChanged(const TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType)
 {
     if (NewSelection != nullptr)
     {

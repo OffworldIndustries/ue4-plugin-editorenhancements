@@ -1,4 +1,4 @@
-// Copyright Offworld Industries
+// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_ReferenceRulesHandler.h"
 #include "Runtime/AssetRegistry/Public/AssetRegistryModule.h"
@@ -8,11 +8,25 @@ bool FOWIReferenceRule::IsViolated(const FString& AssetPath, const TArray<FName>
 {
 	for (const FName& Reference : References)
 	{
-		if (Reference.ToString().StartsWith(MayNotReferenceFolder.Path)
-			&& AssetPath.StartsWith(MayNotReferenceFolder.Path) == false
-			&& IsException(Reference) == false)
+		const FString AssetFilePath = ConvertFilePath(AssetFile);
+		if (IsException(Reference)
+			|| AssetPath.StartsWith(AssetFolder.Path) == false // skip files outside the folder we care about
+			|| AssetPath.Equals(AssetFilePath)) // skip the file that may not be reference itself
 		{
-			ValidationError = AssetPath + " references " + Reference.ToString() + " in invalid folder " + MayNotReferenceFolder.Path;
+			continue;
+		}
+
+		if (Reference.ToString().StartsWith(MayNotReferenceFolder.Path)
+			&& AssetPath.StartsWith(MayNotReferenceFolder.Path) == false)
+		{
+			ValidationError = FString::Printf(TEXT("%s references %s in folder %s."), *AssetPath, *Reference.ToString(), *MayNotReferenceFolder.Path);
+			return true;
+		}
+
+		const FString MayNotReferenceFilePath = ConvertFilePath(MayNotReferenceFile);
+		if (Reference.ToString().Equals(MayNotReferenceFilePath))
+		{
+			ValidationError = FString::Printf(TEXT("%s references %s."), *AssetPath, *Reference.ToString());
 			return true;
 		}
 	}
@@ -22,7 +36,19 @@ bool FOWIReferenceRule::IsViolated(const FString& AssetPath, const TArray<FName>
 
 bool FOWIReferenceRule::CanBeApplied(const FString& AssetPath) const
 {
-	return AssetPath.StartsWith(AssetFolder.Path);
+	const FString AssetFilePath = ConvertFilePath(AssetFile);
+	return AssetPath.StartsWith(AssetFolder.Path) || AssetPath.Equals(AssetFilePath);
+}
+
+FString FOWIReferenceRule::ConvertFilePath(const FFilePath& FilePath)
+{
+	FString OutString = FilePath.FilePath;
+	if (FPaths::IsRelative(FilePath.FilePath))
+	{
+		OutString = OutString.Replace(*FPaths::ProjectContentDir(), TEXT("/Game/"));
+	}
+
+	return FPaths::GetBaseFilename(OutString, false);
 }
 
 bool FOWIReferenceRule::IsException(const FName& Reference) const
@@ -30,6 +56,15 @@ bool FOWIReferenceRule::IsException(const FName& Reference) const
 	for (const FDirectoryPath& ExceptionFolder : ExceptionFolders)
 	{
 		if (Reference.ToString().StartsWith(ExceptionFolder.Path))
+		{
+			return true;
+		}
+	}
+	
+	for (const FFilePath& ExceptionFile : ExceptionFiles)
+	{
+		const FString ExceptionFilePath = ConvertFilePath(ExceptionFile);
+		if (Reference.ToString().Equals(ExceptionFilePath))
 		{
 			return true;
 		}
@@ -78,7 +113,7 @@ bool UOWIReferenceRulesHandler::RuleCanBeApplied(const FString& AssetPath)
 		return false;
 	}
 
-	if (Settings->bCheckCircularDependencies || Settings->BlackList.Num() > 0)
+	if (Settings->bCheckCircularDependencies || Settings->BlackListFolders.Num() > 0 || Settings->BlackListFiles.Num() > 0)
 	{
 		// In case we have a blacklist or need to check circular dependencies we need to check everything
 		return true;
@@ -144,12 +179,23 @@ bool UOWIReferenceRulesHandler::IsBlackListed(const FString& AssetPath, const TA
 	
 	for (const FName& Reference : References)
 	{
-		for (const FDirectoryPath& BlackListItem : Settings->BlackList)
+		for (const FDirectoryPath& BlackListItem : Settings->BlackListFolders)
 		{
 			if (Reference.ToString().StartsWith(BlackListItem.Path)
 				&& AssetPath.StartsWith(BlackListItem.Path) == false)
 			{
-				ValidationError = AssetPath + " references " + Reference.ToString() + " in invalid folder " + BlackListItem.Path;
+				ValidationError = FString::Printf(TEXT("%s references %s in folder %s."), *AssetPath, *Reference.ToString(), *BlackListItem.Path);
+				return true;
+			}
+		}
+		
+		for (const FFilePath& BlackListItem : Settings->BlackListFiles)
+		{
+			const FString BlackListItemPath = FOWIReferenceRule::ConvertFilePath(BlackListItem);
+			if (Reference.ToString().Equals(BlackListItemPath)
+				&& AssetPath.Equals(BlackListItemPath) == false)
+			{
+				ValidationError = FString::Printf(TEXT("%s references %s."), *AssetPath, *Reference.ToString());
 				return true;
 			}
 		}
@@ -172,7 +218,7 @@ bool UOWIReferenceRulesHandler::HasCircularDependency(const FString& AssetPath, 
 
 		if (Reference.ToString().StartsWith(AssetPath))
 		{
-			ValidationError = AssetPath + " has circular dependency.";
+			ValidationError = FString::Printf(TEXT("%s has circular dependency."), *AssetPath);
 			return true;
 		}
 

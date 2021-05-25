@@ -1,4 +1,4 @@
-// Copyright Offworld Industries
+// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_EditorEnhancements.h"
 #include "ContentBrowserModule.h"
@@ -18,7 +18,7 @@ void FOWIEditorEnhancementsModule::StartupModule()
 	UnReleasedAssetsHandler->UpdateFolderColorsOnStart();
 
 	// Custom Shaders folder for USH/USF shaders
-	FString ShaderDirectory = FPaths::Combine(FPaths::ProjectDir(), TEXT("Shaders"));
+	const FString ShaderDirectory = FPaths::Combine(FPaths::ProjectDir(), TEXT("Shaders"));
 	if (FPaths::DirectoryExists(ShaderDirectory) && FPaths::ValidatePath(ShaderDirectory))
 	{
 		AddShaderSourceDirectoryMapping("/Shaders", ShaderDirectory);

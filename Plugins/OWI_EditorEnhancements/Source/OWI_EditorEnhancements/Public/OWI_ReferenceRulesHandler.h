@@ -1,4 +1,4 @@
-// Copyright Offworld Industries
+// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #pragma once
 
@@ -14,7 +14,7 @@ class FAssetRegistryModule;
 USTRUCT()
 struct OWI_EDITORENHANCEMENTS_API FOWIReferenceRule
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 public:
 	
@@ -25,7 +25,16 @@ public:
 	FDirectoryPath MayNotReferenceFolder;
     
 	UPROPERTY(Config, NoClear, EditAnywhere, Category = "OWI Reference Rules", Meta = (ContentDir, TitleProperty = "Path"))
-    TArray<FDirectoryPath> ExceptionFolders;
+	TArray<FDirectoryPath> ExceptionFolders;
+	
+	UPROPERTY(Config, NoClear, EditAnywhere, Category = "OWI Reference Rules", Meta = (ContentDir))
+	FFilePath AssetFile;
+    
+	UPROPERTY(Config, NoClear, EditAnywhere, Category = "OWI Reference Rules", Meta = (ContentDir))
+	FFilePath MayNotReferenceFile;
+    
+	UPROPERTY(Config, NoClear, EditAnywhere, Category = "OWI Reference Rules", Meta = (ContentDir, TitleProperty = "Path"))
+	TArray<FFilePath> ExceptionFiles;
 		
 	/**
 	* \brief Is this rule violated for the given Asset?
@@ -43,6 +52,13 @@ public:
 	 */
 	bool CanBeApplied(const FString& AssetPath) const;
 	
+	/**
+	* \brief Convert a FilePath to a usable String (removes relative path and extension)
+	* \param FilePath The FilePath to convert
+	* \return The String with absolute /Game/ path and w/out extension
+	*/
+	static FString ConvertFilePath(const FFilePath& FilePath);
+	
 private:
 
 	/**
@@ -51,7 +67,6 @@ private:
 	 * \return True if the given reference has an exception
 	 */
 	bool IsException(const FName& Reference) const;
-
 };
 
 /**
@@ -66,15 +81,18 @@ public:
 	
 	UPROPERTY(EditAnywhere, Config, Category = "OWI Reference Rules")
 	bool bEnabled = true;
-	
+
 	UPROPERTY(EditAnywhere, Config, Category = "OWI Reference Rules", Meta = (EditCondition = "bEnabled"))
 	bool bCheckCircularDependencies = false;
-	
+
 	UPROPERTY(EditAnywhere, Config, NoClear, Category = "OWI Reference Rules", Meta = (EditCondition = "bEnabled", TitleProperty = "AssetFolder"))
 	TArray<FOWIReferenceRule> ReferenceRules;
-		
+
 	UPROPERTY(EditAnywhere, Config, NoClear, Category = "OWI Reference Rules", Meta = (EditCondition = "bEnabled", ContentDir))
-	TArray<FDirectoryPath> BlackList;
+	TArray<FDirectoryPath> BlackListFolders;
+
+	UPROPERTY(EditAnywhere, Config, NoClear, Category = "OWI Reference Rules", Meta = (EditCondition = "bEnabled", ContentDir))
+	TArray<FFilePath> BlackListFiles;
 };
 
 UCLASS(Config = Editor, defaultconfig, meta = (DisplayName = "OWI Reference Rules"))

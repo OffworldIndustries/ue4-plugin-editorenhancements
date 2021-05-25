@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-// Copyright Offworld Industries
+// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "CoreMinimal.h"
 #include "Engine/DeveloperSettings.h"
@@ -15,7 +15,7 @@ class USkeletalMesh;
 USTRUCT()
 struct OWI_EDITORENHANCEMENTS_API FOWIPrefixSuffix
 {
-    GENERATED_USTRUCT_BODY()
+    GENERATED_BODY()
 
 public:
 	
