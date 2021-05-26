@@ -1,6 +1,7 @@
 // Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_ContentBrowserMenuExtension.h"
+
 #include "OWI_UnReleasedAssetsHandler.h"
 
 #define LOCTEXT_NAMESPACE "OWI_ContentBrowserMenuExtension"

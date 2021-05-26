@@ -1,12 +1,13 @@
 // Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_UnReleasedAssetsHandler.h"
-#include "Misc/ConfigCacheIni.h"
-#include "Misc/FileHelper.h"
+
+#include "EditorAssetLibrary.h"
 #include "OWI_ReferenceRulesHandler.h"
 #include "Engine/EngineTypes.h"
+#include "Misc/ConfigCacheIni.h"
+#include "Misc/FileHelper.h"
 #include "Settings/ProjectPackagingSettings.h"
-#include "EditorAssetLibrary.h"
 
 DEFINE_LOG_CATEGORY(LogUnReleasedAssetHandler);
 
@@ -39,7 +40,7 @@ void UOWIUnReleasedAssetsHandler::SaveSettings() const
 
 void UOWIUnReleasedAssetsHandler::ReleaseFolder(const FString FolderPath)
 {
-	if (!LoadSettings())
+	if (false == LoadSettings())
 	{
 		return;
 	}
@@ -72,7 +73,7 @@ void UOWIUnReleasedAssetsHandler::ReleaseFolder(const FString FolderPath)
 
 void UOWIUnReleasedAssetsHandler::UnreleaseFolder(const FString FolderPath)
 {
-	if (!LoadSettings())
+	if (false == LoadSettings())
 	{
 		return;
 	}
@@ -81,7 +82,7 @@ void UOWIUnReleasedAssetsHandler::UnreleaseFolder(const FString FolderPath)
 	
 	// Add Folder to reference rules if not yet in there
 	const FOWIReferenceRule TempRule { Settings->AssetFolderToNotBeReferenced, DirectoryPath };
-	if (!ReferenceRulesSettings->ReferenceRules.ContainsByPredicate([&TempRule](const FOWIReferenceRule& TempInnerRule)
+	if (false == ReferenceRulesSettings->ReferenceRules.ContainsByPredicate([&TempRule](const FOWIReferenceRule& TempInnerRule)
         {
             return TempRule.AssetFolder.Path.Equals(TempInnerRule.AssetFolder.Path)
                 && TempRule.MayNotReferenceFolder.Path.Equals(TempInnerRule.MayNotReferenceFolder.Path);
@@ -91,7 +92,7 @@ void UOWIUnReleasedAssetsHandler::UnreleaseFolder(const FString FolderPath)
 	}
 	
 	// Add Folder to never cook if not yet in there
-	if (!PackagingSettings->DirectoriesToNeverCook.ContainsByPredicate([&DirectoryPath](const FDirectoryPath TempDirectoryPath)
+	if (false == PackagingSettings->DirectoriesToNeverCook.ContainsByPredicate([&DirectoryPath](const FDirectoryPath TempDirectoryPath)
         {
             return DirectoryPath.Path.Equals(TempDirectoryPath.Path);
         }))
@@ -114,7 +115,7 @@ void UOWIUnReleasedAssetsHandler::UnreleaseFolder(const FString FolderPath)
 
 void UOWIUnReleasedAssetsHandler::UpdateFolderColorsOnStart()
 {
-	if (!LoadSettings())
+	if (false == LoadSettings())
 	{
 		return;
 	}
@@ -138,7 +139,7 @@ void UOWIUnReleasedAssetsHandler::UpdateFolderColorsOnStart()
 EPathState UOWIUnReleasedAssetsHandler::GetFolderState(TArray<FString> Folders)
 {
 	EPathState PathState = None;
-	if (!LoadSettings())
+	if (false == LoadSettings())
 	{
 		return PathState;
 	}
@@ -198,7 +199,7 @@ void UOWIUnReleasedAssetsHandler::RemoveFolderFromModSDKBlacklist(const FString 
 
 bool UOWIUnReleasedAssetsHandler::LoadModSDKFile(FString& Content) const
 {
-	if (!FPaths::FileExists(Settings->ModSDKFile.FilePath))
+	if (false == FPaths::FileExists(Settings->ModSDKFile.FilePath))
 	{
 		UE_LOG(LogUnReleasedAssetHandler, Error, TEXT("Could not find ModSDK file: %s!"), *Settings->ModSDKFile.FilePath);
 		return false;
@@ -210,7 +211,7 @@ bool UOWIUnReleasedAssetsHandler::LoadModSDKFile(FString& Content) const
 
 void UOWIUnReleasedAssetsHandler::SaveModSDKFile(const FString Content) const
 {
-	if (!FFileHelper::SaveStringToFile(Content, *Settings->ModSDKFile.FilePath))
+	if (false == FFileHelper::SaveStringToFile(Content, *Settings->ModSDKFile.FilePath))
 	{
 		UE_LOG(LogUnReleasedAssetHandler, Error, TEXT("Could not save ModSDK file: %s!"), *Settings->ModSDKFile.FilePath);
 	}
@@ -323,7 +324,7 @@ void UOWIUnReleasedAssetsHandler::UpdateParentFolder(const FString FolderPath, c
 	FString ParentFolder;
 	const bool bHasUnreleasedParent = Settings->UnreleasedFolders.ContainsByPredicate([&FolderPath, &ParentFolder](const auto& TempFolderPath)
 	{
-		if (FolderPath.StartsWith(TempFolderPath) && !FolderPath.Equals(TempFolderPath))
+		if (FolderPath.StartsWith(TempFolderPath) && false == FolderPath.Equals(TempFolderPath))
 		{
 			ParentFolder = TempFolderPath;
 			return true;
@@ -340,7 +341,7 @@ void UOWIUnReleasedAssetsHandler::UpdateParentFolder(const FString FolderPath, c
 	
 	const bool bHasMixedParent = Settings->MixedFolders.ContainsByPredicate([&FolderPath, &ParentFolder](const auto& TempFolderPath)
     {
-        if (FolderPath.StartsWith(TempFolderPath) && !FolderPath.Equals(TempFolderPath))
+        if (FolderPath.StartsWith(TempFolderPath) && false == FolderPath.Equals(TempFolderPath))
         {
             ParentFolder = TempFolderPath;
             return true;
@@ -362,7 +363,7 @@ TArray<FString> UOWIUnReleasedAssetsHandler::GetSubfolders(const FString FolderP
 {
 	TArray<FString> Subfolders = UEditorAssetLibrary::ListAssets(FolderPath, false, true).FilterByPredicate([](const auto& FoundAssetName)
         {
-            return !FoundAssetName.Contains(".");
+            return false == FoundAssetName.Contains(".");
         });
 	for (auto& Subfolder : Subfolders)
 	{

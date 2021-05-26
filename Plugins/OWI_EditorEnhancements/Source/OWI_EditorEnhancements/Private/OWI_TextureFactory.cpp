@@ -5,11 +5,11 @@
 #include "AssetImportTask.h"
 #include "AssetToolsModule.h"
 #include "Dialogs/CustomDialog.h"
-#include "Widgets/Images/SImage.h"
-#include "Widgets/Input/STextComboBox.h"
-#include "Widgets/Input/SSpinBox.h"
-#include "Widgets/Input/SCheckBox.h"
 #include "UObject/Class.h"
+#include "Widgets/Images/SImage.h"
+#include "Widgets/Input/SCheckBox.h"
+#include "Widgets/Input/SSpinBox.h"
+#include "Widgets/Input/STextComboBox.h"
 #include "Widgets/Layout/SUniformGridPanel.h"
 
 DEFINE_LOG_CATEGORY(LogOWITextureImporter);
@@ -27,7 +27,7 @@ UOWITextureFactory::UOWITextureFactory(const FObjectInitializer& ObjectInitializ
 UObject* UOWITextureFactory::FactoryCreateBinary(UClass* Class, UObject* InParent, FName Name, const EObjectFlags Flags,
                                                  UObject* Context, const TCHAR* Type, const uint8*& Buffer, const uint8* BufferEnd, FFeedbackContext* Warn)
 {
-    if (!Name.ToString().StartsWith("T_"))
+    if (false == Name.ToString().StartsWith("T_"))
     {
         Name = *FString("T_").Append(Name.ToString());
     }
@@ -35,7 +35,7 @@ UObject* UOWITextureFactory::FactoryCreateBinary(UClass* Class, UObject* InParen
     UObject* Object = Super::FactoryCreateBinary(Class, InParent, Name, Flags, Context, Type, Buffer, BufferEnd, Warn);
     
     UTexture* Texture = CastChecked<UTexture>(Object);
-    if (!IsValid(Texture))
+    if (false == IsValid(Texture))
     {
         // Something went wrong - return the original Object
         UE_LOG(LogOWITextureImporter, Error, TEXT("Couldn't import as Texture"));

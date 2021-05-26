@@ -17,6 +17,9 @@ class STextureDialog;
 class SCustomDialog;
 class STextComboBox;
 
+/**
+ * Struct that represents the Import Settings for a texture.
+ */
 USTRUCT()
 struct OWI_EDITORENHANCEMENTS_API FOWITextureImportSettings
 {
@@ -84,6 +87,9 @@ private:
 	
 };
 
+/**
+ * Class that will create and show a dialog when importing a texture to set the settings.
+ */
 class OWI_EDITORENHANCEMENTS_API SOWITextureImportSettingsDialog final : public SCompoundWidget
 {
 	
@@ -96,6 +102,10 @@ public:
 	
 	void Construct(const FArguments& InArgs);
 
+	/**
+	 * @brief Get the Texture Import Settings
+	 * @return The FOWITextureImportSettings being used.
+	 */
 	FOWITextureImportSettings* GetTextureImportSettings() const;
 	
 	bool UseSameSettingsForAll() const;
@@ -138,27 +148,82 @@ private:
 	// The currently selected ImageImportSetting
 	FOWITextureImportSettings* CurrentImageImportSettings = nullptr;
 	
+	/**
+	 * @brief The ImportSettings selection has changed
+	 * @param NewSelection The newly selected settings
+	 * @param SelectionType On the selection was made
+	 */
 	void HandleImageImportSettingSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType);
 
+	/**
+	* @brief The Compression settings selection has changed
+	* @param NewSelection The newly selected settings
+	* @param SelectionType On the selection was made
+	*/
 	void HandleCompressionSettingSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const;
 
+	/**
+	* @brief The MipGen settings selection has changed
+	* @param NewSelection The newly selected settings
+	* @param SelectionType On the selection was made
+	*/
 	void HandleMipGenSettingsSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const;
 
+	/**
+	* @brief The LOD group settings selection has changed
+	* @param NewSelection The newly selected settings
+	* @param SelectionType On the selection was made
+	*/
 	void HandleLODGroupSettingsSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectionType) const;
 
+	/**
+	 * @brief Get the Names of the Enums
+	 * @param Name Name of the Enum to convert
+	 * @return The names of the enums
+	 */
 	TArray<TSharedPtr<FString>> GetEnumNames(const TCHAR* Name) const;
 
+	/**
+	 * @brief Convert a String to the corresponding enum
+	 * @param Name The name to check for
+	 * @param Options The possible enums
+	 * @return The enum found
+	 */
 	static int32 GetEnumValueByName(FString Name, TArray<TSharedPtr<FString>> Options);
 
+	/**
+	 * @brief Is SRGB checked?
+	 * @return State of the RGB checkbox
+	 */
 	ECheckBoxState IsSRGBChecked() const;
 	
+	/**
+	 * @brief The value of the SRGB checkbox changed
+	 * @param CheckType The new state
+	 */
 	void SRGBCheckedChanged(ECheckBoxState CheckType) const;
 
+	/**
+	* @brief Is "flip green channel" checked?
+	* @return State of the "flip green channel" checkbox
+	*/
 	ECheckBoxState IsFlipGreenChannelChecked() const;
 	
+	/**
+	* @brief The value of the "flip green channel" checkbox changed
+	* @param CheckType The new state
+	*/
 	void FlipGreenChannelCheckedChanged(ECheckBoxState CheckType) const;
 
+	/**
+	 * @brief The value of the LOD Bias value has changed
+	 * @param NewValue The new value for LOD Bias
+	 */
 	void LODBiasValueChanged(int32 NewValue) const;
 	
+	/**
+	 * @brief Get the value for LOD Bias
+	 * @return The value for LOD Bias
+	 */
 	int32 GetLODBiasValue() const;
 };

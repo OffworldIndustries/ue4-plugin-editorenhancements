@@ -3,14 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/EngineTypes.h"
 #include "Engine/DeveloperSettings.h"
+#include "Engine/EngineTypes.h"
+
 #include "OWI_ReferenceRulesHandler.generated.h"
 
 struct FAssetData;
 class FAssetRegistryModule;
 
-/** Configurable properties for reference rule. */
+/**
+ * Configurable properties for reference rule.
+ */
 USTRUCT()
 struct OWI_EDITORENHANCEMENTS_API FOWIReferenceRule
 {
@@ -95,6 +98,9 @@ public:
 	TArray<FFilePath> BlackListFiles;
 };
 
+/**
+ * Handler for the Reference rules that checks if any rules are violated.
+ */
 UCLASS(Config = Editor, defaultconfig, meta = (DisplayName = "OWI Reference Rules"))
 class OWI_EDITORENHANCEMENTS_API UOWIReferenceRulesHandler final : public UObject
 {
