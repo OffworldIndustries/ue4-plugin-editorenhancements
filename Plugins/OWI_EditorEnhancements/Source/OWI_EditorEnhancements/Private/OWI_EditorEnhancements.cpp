@@ -1,7 +1,9 @@
 // Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_EditorEnhancements.h"
+
 #include "ContentBrowserModule.h"
+
 #include "OWI_ContentBrowserMenuExtension.h"
 #include "OWI_UnReleasedAssetsHandler.h"
 
@@ -29,6 +31,7 @@ void FOWIEditorEnhancementsModule::ShutdownModule()
 {
 	ResetAllShaderSourceDirectoryMappings();
 }
+
 TSharedRef<FExtender> FOWIEditorEnhancementsModule::ContentBrowserExtender(const TArray<FString>& Path)
 {
 	Extension = MakeShareable(new FOWIContentBrowserMenuExtension());

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DeveloperSettings.h"
+
 #include "OWI_NamingConventionHandler.generated.h"
 
 struct FDirectoryPath;
@@ -12,6 +13,9 @@ class UMaterial;
 class UMaterialInstance;
 class USkeletalMesh;
 
+/**
+ * Struct that represents a Prefix and a Suffix
+ */
 USTRUCT()
 struct OWI_EDITORENHANCEMENTS_API FOWIPrefixSuffix
 {
@@ -78,6 +82,9 @@ public:
 	
 };
 
+/**
+ * Handler for the Naming Conventions that checks names of files if they match the specs
+ */
 UCLASS()
 class OWI_EDITORENHANCEMENTS_API UOWINamingConventionHandler final : public UObject
 {

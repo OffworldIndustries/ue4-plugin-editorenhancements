@@ -1,11 +1,12 @@
 ﻿// Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_NamingConventionHandler.h"
+
 #include "Engine/Blueprint.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/SkeletalMesh.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstance.h"
-#include "Engine/SkeletalMesh.h"
-#include "Engine/EngineTypes.h"
 
 bool UOWINamingConventionHandler::NamingConventionCanBeApplied(UObject* Asset)
 {

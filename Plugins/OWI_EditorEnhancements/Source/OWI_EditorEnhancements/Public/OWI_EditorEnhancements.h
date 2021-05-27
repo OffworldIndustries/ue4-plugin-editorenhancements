@@ -7,6 +7,9 @@
 
 class FOWIContentBrowserMenuExtension;
 
+/**
+ * The Module for the Editor Enhancements. Used to sync the UnReleased folder colors.
+ */
 class OWI_EDITORENHANCEMENTS_API FOWIEditorEnhancementsModule final : public IModuleInterface
 {
 public:

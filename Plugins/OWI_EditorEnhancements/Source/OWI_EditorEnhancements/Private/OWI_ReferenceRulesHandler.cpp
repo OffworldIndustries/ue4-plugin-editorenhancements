@@ -1,6 +1,7 @@
 // Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_ReferenceRulesHandler.h"
+
 #include "Runtime/AssetRegistry/Public/AssetRegistryModule.h"
 #include "Runtime/AssetRegistry/Public/IAssetRegistry.h"
 
@@ -113,7 +114,9 @@ bool UOWIReferenceRulesHandler::RuleCanBeApplied(const FString& AssetPath)
 		return false;
 	}
 
-	if (Settings->bCheckCircularDependencies || Settings->BlackListFolders.Num() > 0 || Settings->BlackListFiles.Num() > 0)
+	if (Settings->bCheckCircularDependencies
+		|| Settings->BlackListFolders.Num() > 0
+		|| Settings->BlackListFiles.Num() > 0)
 	{
 		// In case we have a blacklist or need to check circular dependencies we need to check everything
 		return true;

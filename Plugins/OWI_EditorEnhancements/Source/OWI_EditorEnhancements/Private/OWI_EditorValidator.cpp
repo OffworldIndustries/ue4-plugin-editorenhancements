@@ -1,8 +1,9 @@
 // Copyright Offworld Industries Ltd. All Rights Reserved.
 
 #include "OWI_EditorValidator.h"
-#include "OWI_ReferenceRulesHandler.h"
+
 #include "OWI_NamingConventionHandler.h"
+#include "OWI_ReferenceRulesHandler.h"
 
 bool UOWIEditorValidator::IsEnabled() const
 {
