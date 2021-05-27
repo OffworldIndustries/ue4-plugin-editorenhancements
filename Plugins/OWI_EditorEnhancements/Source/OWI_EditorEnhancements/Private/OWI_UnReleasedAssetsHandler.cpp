@@ -3,11 +3,12 @@
 #include "OWI_UnReleasedAssetsHandler.h"
 
 #include "EditorAssetLibrary.h"
-#include "OWI_ReferenceRulesHandler.h"
 #include "Engine/EngineTypes.h"
 #include "Misc/ConfigCacheIni.h"
 #include "Misc/FileHelper.h"
 #include "Settings/ProjectPackagingSettings.h"
+
+#include "OWI_ReferenceRulesHandler.h"
 
 DEFINE_LOG_CATEGORY(LogUnReleasedAssetHandler);
 
